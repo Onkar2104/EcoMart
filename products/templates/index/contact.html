@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/core-style.css' %}">
+
+
+    <div class="contact-area d-flex align-items-center">
+
+        <div class="google-map">
+            <div id="googleMap"></div>
+        </div>
+
+        <div class="contact-info">
+            <h2>How to Find Us</h2>
+            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+
+            <div class="contact-address mt-50">
+                <p><span>address:</span> 10 Suffolk st Soho, London, UK</p>
+                <p><span>telephone:</span> +12 34 567 890</p>
+                <p><a href="mailto:contact@essence.com">contact@essence.com</a></p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'js/plugins.js' %}"></script>
+   
+    <script src="{% static 'js/classy-nav.min.js' %}"></script>
+    
+    <script src="{% static 'js/active.js' %}"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+    <script src="{% static 'js/map-active.js' %}"></script>
+
+
+    {% endblock %}
