@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from products.views import *
+from account.views import *
 
 urlpatterns = [
     path('', home_page, name="home_page"),
@@ -25,6 +26,10 @@ urlpatterns = [
     path('product_id/', product, name="product"),
     path('contact/', contact, name="contact"),
     path('checkout/', checkout, name="checkout"),
+    path('about/', about_us, name="about"),
+
+    path('login/', login, name="login"),
+    path('register/', register, name="register"),
 
     path('admin/', admin.site.urls),
 ]
