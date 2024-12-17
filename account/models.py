@@ -20,7 +20,7 @@ class CustomUserManager(BaseUserManager):
         return user
     
     
-    def create_user(self, email=None, password=None, *extra_fields):
+    def create_user(self, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_seller', False)
@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     middle_name = models.CharField(max_length=20, blank=True, default='')
     last_name = models.CharField(max_length=20, blank=False, default='')
     otp = models.IntegerField(blank=True, null=True)
-    email_verified = models.BooleanField(default=False)
+    # email_verified = models.BooleanField(default=False)
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
