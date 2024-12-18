@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from account.models import User
+from account.models import User, Account
 from account.forms import UserAdminCreationForm, UserAdminChangeForm
 
 # Register your models here.
@@ -29,3 +29,13 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+
+
+class UserAccount(admin.ModelAdmin):
+    list_display = ['user_email', 'address', 'city', 'state', 'country']
+
+    def user_email(self, obj):
+        return obj.user.email
+    user_email.admin_order_field = 'user__email'
+
+admin.site.register(Account, UserAccount)

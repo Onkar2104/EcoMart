@@ -115,18 +115,22 @@
                 </div>
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#"><img src="{% static 'img/core-img/user.svg' %}" alt=""></a>
+                    <a href="/account/"><img src="{% static 'img/core-img/user.svg' %}" alt=""></a>
                 </div>
                 <!-- Cart Area -->
+                {% if request.user.is_authenticated  %}
                 <div class="cart-area">
                     <a href="#" id="essenceCartBtn"><img src="{% static 'img/core-img/bag.svg' %}" alt="">
                         <span>3</span></a>
                 </div>
+                {% endif %}
             </div>
 
         </div>
     </header>
 
+
+    
     <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
 
@@ -207,6 +211,7 @@
             </div>
         </div>
     </div>
+
     <!-- ##### Right Side Cart End ##### -->
 
     {% block start %}

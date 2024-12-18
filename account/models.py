@@ -68,3 +68,34 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'
+
+
+class Account(models.Model):
+    GENDER_CHOICES = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('Other', 'Other'),
+    )
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    first_name = User.first_name
+    middle_name = User.middle_name
+    last_name = User.last_name
+    email = User.email
+    phone = User.phone
+
+    profile_image = models.ImageField(upload_to='profile/', default=None)
+    date_of_birth = models.DateField(default=None, blank=True, null=True)
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
+    address = models.TextField( null=True, blank=True)
+    land_mark = models.TextField(null=True, blank=True)
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
+    postal_code = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.user.first_name}"
+    
+    def __str__(self):
+        return self.user.email
