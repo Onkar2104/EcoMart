@@ -23,6 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-!9acj-ccq1aw@_o&pge*^g-vks(rh4f0zwcsd5$gl**gjd#(y!'
 
+city_api = 'U0eqBUkJ1-0RPX7jKPq1ZPE64bvXxsCTrs04RxTkS8try25rqwpFInDMf7ljW9nbCxo'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -123,14 +125,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
