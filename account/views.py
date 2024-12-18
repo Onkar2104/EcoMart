@@ -9,6 +9,7 @@ import random
 from account.models import User, Account
 from django.core.mail import send_mail
 from django.conf import settings
+from django.urls import reverse
 
 # Create your views here.
 
@@ -144,102 +145,59 @@ def register(request):
 
 
 @login_required(login_url="/login/")
+
+
+
 def account(request):
-
-    
-    # account_update = User.objects.get(user=request.user)
-
     try:
-        # profile = User.objects.get(user=request.user)
         account = Account.objects.get(user=request.user)
-
-        first_name = request.user.first_name
-        middle_name = request.user.middle_name
-        last_name = request.user.last_name
-        email = request.user.email
-        phone = request.user.phone
-
-        if account.date_of_birth:
-            date_of_birth = account.date_of_birth.strftime('%Y-%m-%d')
-        else:
-            date_of_birth = ''
-
-        profile_image = account.profile_image
-        # date_of_birth = account.date_of_birth
-        gender = account.gender
-        address = account.address
-        land_mark = account.land_mark
-        city = account.city
-        state = account.state
-        country = account.country
-        postal_code = account.postal_code
-
     except Account.DoesNotExist:
         account = Account(user=request.user)
+        account.save()
 
-        first_name = request.user.first_name if request.user.first_name else ""
-        middle_name = getattr(request.user, 'middle_name', "")
-        last_name = request.user.last_name if request.user.last_name else ""
-        email = request.user.email if request.user.email else ""
-        phone = getattr(request.user, 'phone', "")
-        
-        profile_image = account.profile_image if account.profile_image else ""
-        date_of_birth = account.date_of_birth if account.date_of_birth else ""
-        gender = account.gender if account.gender else ""
-        address = account.address if account.address else ""
-        land_mark = account.land_mark if account.land_mark else ""
-        city = account.city if account.city else ""
-        state = account.state if account.state else ""
-        country = account.country if account.country else ""
-        postal_code = account.postal_code if account.postal_code else ""
+    # Initialize user and account data
+    user = request.user
+    first_name = user.first_name or ""
+    middle_name = getattr(user, "middle_name", "")
+    last_name = user.last_name or ""
+    email = user.email or ""
+    phone = getattr(user, "phone", "")
 
-        if request.method == "POST":
-            account.profile_image = request.FILE.get('profile_image') if request.FILES.get('profile_image') else account.profile_image
-            account.date_of_birth = request.POST.get('date_of_birth')
-            account.gender = request.POST.get('gender')
-            account.address = request.POST.get('address')
-            account.land_mark = request.POST.get('land_mark')
-            account.city = request.POST.get('city')
-            account.state = request.POST.get('state')
-            account.country = request.POST.get('country')
-            account.postal_code = request.POST.get('postal_code')
-
-            account.save()
-            messages.success(request, "Profile updated successfully.!")
-            return redirect('/account/')
-        
-
-    ### For Update account data ###
-    update_user = request.user
-    update_account = Account.objects.get(user = request.user)
+    profile_image = account.profile_image or ""
+    date_of_birth = account.date_of_birth.strftime('%Y-%m-%d') if account.date_of_birth else ""
+    gender = account.gender or ""
+    address = account.address or ""
+    land_mark = account.land_mark or ""
+    city = account.city or ""
+    state = account.state or ""
+    country = account.country or ""
+    postal_code = account.postal_code or ""
 
     if request.method == "POST":
-        update_user.first_name = request.POST.get('first_name', update_user.first_name)
-        update_user.middle_name = request.POST.get('middle_name')
-        update_user.last_name = request.POST.get('last_name')
-        update_user.phone = request.POST.get('phone')
+        # Update user fields
+        user.first_name = request.POST.get('first_name', user.first_name)
+        user.middle_name = request.POST.get('middle_name', middle_name)
+        user.last_name = request.POST.get('last_name', user.last_name)
+        user.phone = request.POST.get('phone', phone)
+        user.save()
 
-        update_account.profile_image = request.FILES.get('profile_image') if request.FILES.get('profile_image') else update_account.profile_image
-        update_account.date_of_birth = request.POST.get('date_of_birth')
-        update_account.gender = request.POST.get('gender')
-        update_account.address = request.POST.get('address')
-        update_account.land_mark = request.POST.get('land_mark')
-        update_account.city = request.POST.get('city')
-        update_account.state = request.POST.get('state')
-        update_account.country = request.POST.get('country')
-        update_account.postal_code = request.POST.get('postal_code')
+        # Update account fields
+        account.profile_image = request.FILES.get('profile_image', account.profile_image)
+        account.date_of_birth = request.POST.get('date_of_birth', account.date_of_birth)
+        account.gender = request.POST.get('gender', account.gender)
+        account.address = request.POST.get('address', account.address)
+        account.land_mark = request.POST.get('land_mark', account.land_mark)
+        account.city = request.POST.get('city', account.city)
+        account.state = request.POST.get('state', account.state)
+        account.country = request.POST.get('country', account.country)
+        account.postal_code = request.POST.get('postal_code', account.postal_code)
+        account.save()
 
-        update_user.save()
-        update_account.save()
-        
-
-        messages.success(request, "Updated Successfully.!")
-        return redirect('/account/')
-
-
+        messages.success(request, "Profile updated successfully!")
+        return redirect(reverse('account'))
 
     context = {
-        "page":"My Account",
+        "page": "My Account",
         'first_name': first_name,
         'middle_name': middle_name,
         'last_name': last_name,
@@ -254,6 +212,6 @@ def account(request):
         'state': state,
         'country': country,
         'postal_code': postal_code,
-        }
-    
+    }
+
     return render(request, "account.html", context)
