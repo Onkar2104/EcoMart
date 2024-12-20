@@ -133,21 +133,29 @@ def register(request):
                 del request.session['register_data']
 
                 messages.success(request, "Registration successful! Please log in.")
-                print("Registration successful! Please log in.")
+
+                #welcome email
+                subject = "Welcome to 'EcoMart'! "
+                message = f"Hello {register_data['first_name']},\nWelcome to The EcoMart! We're glad to have you.\n\nYour Details:\nFirst Name: {register_data['first_name']}\nMiddle Name: {register_data['middle_name']}\nLast Name: {register_data['last_name']}\nEmail: {register_data['email']}\nPhone No.: {register_data['phone']}\n\nWarm regards,\nEcoMart."
+        
+                from_email = settings.EMAIL_HOST_USER
+                recipient_list = [register_data['email']]
+
+                try:
+                    send_mail(subject, message, from_email, recipient_list)
+                except Exception as e:
+                    print("Account created successfully, but email failed to send.")
+
                 return redirect('/login/')
             else:
                 messages.error(request, "Invalid OTP. Please try again.")
                 print("Invalid OTP. Please try again.")
                 return render(request, "register.html", {"step": "verify_otp"})
 
-    # Default: Show registration form
     return render(request, "register.html", {"step": "register"})
 
 
 @login_required(login_url="/login/")
-
-
-
 def account(request):
     try:
         account = Account.objects.get(user=request.user)
@@ -215,3 +223,5 @@ def account(request):
     }
 
     return render(request, "account.html", context)
+
+
