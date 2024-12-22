@@ -51,6 +51,8 @@ class AddProduct(models.Model):
     # available_stock = models.IntegerField()
     sizes = models.CharField(max_length=5)
     product_image = models.ImageField(upload_to='products/', null=True, blank=True)
+    product_image2 = models.ImageField(upload_to='products/', null=True, blank=True)
+    product_image3 = models.ImageField(upload_to='products/', null=True, blank=True)
     product_video = models.FileField(upload_to='products/', null=True, blank=True)
     # shipping_price = models.IntegerField(blank=True, null=True, default='40')
 

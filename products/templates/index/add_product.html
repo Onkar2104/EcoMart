@@ -55,6 +55,14 @@
                                         required>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <label for="product_image2" class="form-label">Product Image 2</label>
+                                    <input type="file" class="form-control" id="product_image2" name="product_image2">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="product_image3" class="form-label">Product Image 3</label>
+                                    <input type="file" class="form-control" id="product_image3" name="product_image3">
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <label for="product_video" class="form-label">Product Video</label>
                                     <input type="file" class="form-control" id="product_video" name="product_video">
                                 </div>
@@ -101,11 +109,11 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="price" class="form-label">Product Price <span>*</span></label>
-                                    <input type="number" class="form-control" id="price" name="price" step="100">
+                                    <input type="number" class="form-control" id="price" name="price">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="discount" class="form-label">Discount Product(%) <span>*</span></label>
-                                    <input type="number" class="form-control" id="discount" name="discount" step="10">
+                                    <input type="number" class="form-control" id="discount" name="discount" step="0.01">
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="discounted_price" class="form-label">Discounted Price</label>
@@ -148,7 +156,7 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="stock" class="form-label">Product Stock <span>*</span></label>
-                                <input type="number" class="form-control" id="stock" name="stock" step="10" required>
+                                <input type="number" class="form-control" id="stock" name="stock" required>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="sizes">Product Size <span>*</span></label>
@@ -191,6 +199,33 @@
         });
 
     </script>
+
+<script>
+    // Wait for the DOM to load
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select the notification div
+        const notification = document.getElementById('notification');
+        // Check if the notification exists
+        if (notification) {
+            // Set a timeout to remove the notification after 10 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 10000); // 10 seconds = 10000 ms
+        }
+    });
+</script>
+
+<script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+
+<script src="{% static 'js/popper.min.js' %}"></script>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+<script src="{% static 'js/classy-nav.min.js' %}"></script>
+
+<script src="{% static 'js/active.js' %}"></script>
+
 </body>
 
 {% endblock %}
