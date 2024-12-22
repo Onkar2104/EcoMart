@@ -41,6 +41,8 @@ def add_product(request):
             stock = request.POST.get('stock'),
             sizes = request.POST.get('sizes'),
             product_image = request.FILES.get('product_image'),
+            product_image2 = request.FILES.get('product_image2'),
+            product_image3 = request.FILES.get('product_image3'),
             product_video = request.FILES.get('product_video'),
         )
 
