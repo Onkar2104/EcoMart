@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from products.models import AddProduct
 from account.models import User
 from django.contrib import messages
@@ -6,7 +6,14 @@ from django.contrib import messages
 # Create your views here.
 
 def home_page(request):
-    context = {"page":"EcoMart"}
+    user = request.user
+
+    products = AddProduct.objects.all()
+
+    context = {
+        "page":"EcoMart",
+        "products":products,
+        }
     return render(request, 'index/index.html', context)
 
 def shop(request):
@@ -76,7 +83,7 @@ def blog(request):
     context = {"page":"Blog"}
     return render(request, "index/blog.html", context)
 
-def product(request):
+def product_id(request):
     context = {"page":"Product Name"}
     return render(request, "index/single-product-details.html", context)
 
