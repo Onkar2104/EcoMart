@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from account.models import User
+import uuid
 
 # Create your models here.
 
@@ -36,6 +37,7 @@ class AddProduct(models.Model):
         ('Kurtas', 'Kurtas'),
     }
 
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=50, null=False, blank=False)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICE)

@@ -99,12 +99,28 @@
                     <div class="popular-products-slides owl-carousel">
 
                         <!-- Single Product -->
+                        {% for product in products %}
+                        {% if product.gender == 'Women' %}
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="{% static 'img/product-img/product-1.jpg' %}" alt="">
+                                <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="{% static 'img/product-img/product-1.jpg' %}" alt="">
+                                <img class="hover-img" src="{{ product.product_image2.url }}" alt="{{ product.product_name }}">
+
+                                <!-- Product Badge -->
+                                 {% if product.discount %}
+                                <div class="product-badge offer-badge">
+                                    <span>-{{ product.discount }}%</span>
+                                </div>
+                                {% endif %} 
+
+                                {% if product.brand == 'River' %}
+                                <div class="product-badge new-badge">
+                                    <span>New</span>
+                                </div>
+                                {% endif %}
+
                                 <!-- Favourite -->
                                 <div class="product-favourite">
                                     <a href="#" class="favme fa fa-heart"></a>
@@ -112,11 +128,15 @@
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
-                                <span>topshop</span>
-                                <a href="/product_id/">
-                                    <h6>Knot Front Mini Dress</h6>
+                                <span>{{ product.brand }}</span>
+                                <a href=/product_id/ >
+                                    <h6>{{ product.product_name }}</h6>
                                 </a>
-                                <p class="product-price">$80.00</p>
+                                {% if product.discount %}
+                                <p class="product-price"><span class="old-price">₹{{ product.price }}</span> ₹{{ product.discounted_price }}</p>
+                                {% else %}
+                                <p class="product-price">₹ {{ product.price }}</p>
+                                {% endif %}
 
                                 <!-- Hover Content -->
                                 <div class="hover-content">
@@ -127,6 +147,8 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
 
                         <!-- Single Product -->
                         <div class="single-product-wrapper">
@@ -229,6 +251,65 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="popular-products-slides owl-carousel">
+                        {% for product in products %}
+                        {% if product.gender == 'Men' %}
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                                <!-- Hover Thumb -->
+                                <img class="hover-img" src="{{ product.product_image2.url }}" alt="{{ product.product_name }}">
+
+                                <!-- Product Badge -->
+                                 {% if product.discount %}
+                                <div class="product-badge offer-badge">
+                                    <span>-{{ product.discount }}%</span>
+                                </div>
+                                {% endif %} 
+
+                                {% if product.price == 1800 %}
+                                <div class="product-badge new-badge">
+                                    <span>New</span>
+                                </div>
+                                {% endif %}
+
+                                <!-- Favourite -->
+                                <div class="product-favourite">
+                                    <a href="#" class="favme fa fa-heart"></a>
+                                </div>
+                            </div>
+                            <!-- Product Description -->
+                            <div class="product-description">
+                                <span>{{ product.brand }}</span>
+                                <a href=/product_id/ >
+                                    <h6>{{ product.product_name }}</h6>
+                                </a>
+                                {% if product.discount %}
+                                <p class="product-price"><span class="old-price">₹ {{ product.price }}</span> ₹ {{ product.discounted_price }}</p>
+                                {% else %}
+                                <p class="product-price">₹ {{ product.price }}</p>
+                                {% endif %}
+
+                                <!-- Hover Content -->
+                                <div class="hover-content">
+                                    <!-- Add to Cart -->
+                                    <div class="add-to-cart-btn">
+                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
