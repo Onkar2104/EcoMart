@@ -12,7 +12,7 @@ class AddProductAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Seller Info', {'fields': ('user_email', 'user_phone')}),
-        ('Product Info', {'fields': ('product_name', 'product_image', 'product_video', 'gender', 'product_category', 'product_type', 'description', 'price', 'color', 'brand', 'discount', 'discounted_price', 'stock', 'sizes')}),
+        ('Product Info', {'fields': ('product_name', 'product_image', 'product_image2', 'product_image3', 'product_video', 'gender', 'product_category', 'product_type', 'description', 'price', 'color', 'brand', 'discount', 'discounted_price', 'stock', 'sizes')}),
     )
 
     def user_email(self, obj):

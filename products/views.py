@@ -17,7 +17,13 @@ def home_page(request):
     return render(request, 'index/index.html', context)
 
 def shop(request):
-    context = {"page":"Shop"}
+    products = AddProduct.objects.all()
+
+    context = {
+        "page":"Shop",
+        "products": products,
+        }
+    
     return render(request, "index/shop.html", context)
 
 def my_products(request):
