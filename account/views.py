@@ -23,7 +23,7 @@ def login(request):
 
         if not User.objects.filter(email=email).exists():
             messages.info(request, "Invalid Email.!")
-            print
+
             return redirect('/login/')
 
         user = authenticate(request, email = email, password = password)
@@ -60,22 +60,26 @@ def register(request):
             # Validation
             if not email:
                 messages.error(request, "Email is required.")
-                print("Email is required.")
+
                 return redirect('/register/')
+            
             if password != confirm_password:
                 messages.error(request, "Passwords do not match.")
-                print("Passwords do not match.")
+
                 return redirect('/register/')
+            
             if User.objects.filter(email=email).exists():
                 messages.error(request, "Email is already in use.")
-                print( "Email is already in use.")
+
                 return redirect('/register/')
+            
             try:
                 validate_password(password)
             except ValidationError as e:
                 messages.error(request, " ".join(e.messages))
-                print("password validation")
+
                 return redirect('/register/')
+
 
             # Generate OTP and store in session
             send_otp = random.randint(1000, 9999)
@@ -98,10 +102,9 @@ def register(request):
             try:
                 send_mail(subject, message, from_mail, recipient_list)
                 messages.success(request, "Verification code has been sent to your email.")
-                print("Verification code has been sent to your email.")
             except Exception as e:
                 messages.error(request, f"Failed to send OTP: {e}")
-                print("Failed")
+
                 return redirect('/register/')
 
             # Prompt for OTP input
@@ -115,8 +118,9 @@ def register(request):
 
             if not register_data or not stored_otp:
                 messages.error(request, "Session expired. Please try again.")
-                print("Session expired. Please try again.")
+
                 return redirect('/register/')
+            
 
             if str(otp_input) == str(stored_otp):
                 # OTP is correct, create the user
@@ -144,12 +148,12 @@ def register(request):
                 try:
                     send_mail(subject, message, from_email, recipient_list)
                 except Exception as e:
-                    print("Account created successfully, but email failed to send.")
+                    messages.success("Account created successfully, but email failed to send.")
 
                 return redirect('/login/')
             else:
                 messages.error(request, "Invalid OTP. Please try again.")
-                print("Invalid OTP. Please try again.")
+                
                 return render(request, "register.html", {"step": "verify_otp"})
 
     return render(request, "register.html", {"step": "register"})
