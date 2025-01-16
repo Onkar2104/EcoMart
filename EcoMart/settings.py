@@ -28,7 +28,7 @@ city_api = 'U0eqBUkJ1-0RPX7jKPq1ZPE64bvXxsCTrs04RxTkS8try25rqwpFInDMf7ljW9nbCxo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'account.User'
 
