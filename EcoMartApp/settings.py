@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'EcoMart.urls'
+ROOT_URLCONF = 'EcoMartApp.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'EcoMart.wsgi.application'
+WSGI_APPLICATION = 'EcoMartApp.wsgi.application'
 
 
 # Database
