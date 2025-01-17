@@ -19,7 +19,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@65.0.170.109 << 'EOF'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ubuntu@65.0.170.109 << 'EOF'
           cd project/EcoMart
           git pull origin main
           source env/bin/activate
