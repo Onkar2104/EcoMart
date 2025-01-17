@@ -37,6 +37,8 @@ urlpatterns = [
     path('logout/', logout_page, name="logout"),
     path('register/', register, name="register"),
 
+    path('health/', health, name="health"),
+
     path('admin/', admin.site.urls),
 ]
 
