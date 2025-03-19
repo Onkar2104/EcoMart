@@ -104,3 +104,13 @@ def checkout(request):
 def about_us(request):
     context = {'page':'About Us'}
     return render(request, "index/regular-page.html", context)
+
+
+def health(request):
+    context = {'page': 'Health'}
+    return render(request, 'index/health.html', context)
+
+
+def individual_product(request):
+    context = {'page':"<id>"}
+    return render(request, 'index/single-product-details.html', context)
