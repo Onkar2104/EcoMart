@@ -31,6 +31,7 @@ urlpatterns = [
     path('contact/', contact, name="contact"),
     path('checkout/', checkout, name="checkout"),
     path('about/', about_us, name="about"),
+    path('individual_product/', individual_product, name="individual_product"),
 
     path('account/', account, name="account"),
     path('login/', login, name="login"),
